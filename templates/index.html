@@ -24,6 +24,12 @@
     <body>
         {% block body %}
             <div class="section" id="splash">
+                {% if config.extra.landingpage_text %}
+                    <div class="landingpage-text">
+                        <p>{{ config.extra.landingpage_text }}</p>
+                        <br><br>
+                    </div>
+                {% endif %}
                 {% if config.extra.sam_menu %}
                     {% for link in config.extra.sam_menu %}
                         <div class="big-link">
