@@ -3,54 +3,55 @@
 <!DOCTYPE html>
 {% block html %}
 <html>
-{% endblock html %}
-    <head>
-        {% block head %}
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="chrome=1">
-        <meta name="HandheldFriendly" content="True">
-        <meta name="MobileOptimized" content="320">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="referrer" content="no-referrer">
+  {% endblock html %}
+  <head>
+    {% block head %}
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="MobileOptimized" content="320" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="no-referrer" />
 
-        <link rel="stylesheet" href="{{ get_url(path='fonts.css') }}">
-        <link rel="stylesheet" href="{{ get_url(path='style.css') }}">
+    <link rel="stylesheet" href="{{ get_url(path='fonts.css') }}" />
+    <link rel="stylesheet" href="{{ get_url(path='style.css') }}" />
+    <link rel="stylesheet" href="{{ get_url(path='override.css') }}" />
 
-        <title>{% block htmltitle %}{{ config.title }}{% endblock htmltitle %}</title>
+    <title>
+      {% block htmltitle %}{{ config.title }}{% endblock htmltitle %}
+    </title>
 
-        {% if config.generate_feed %}
-        <link rel="alternate" type="application/rss+xml" title="Feed" href="{{ get_url(path='atom.xml') }}">
-        {% endif %}
-        {% endblock head %}
-    </head>
-    <body>
-        {% block body %}
-            <div class="section" id="splash">
-                {% if config.extra.landingpage_text %}
-                    <div class="landingpage-text">
-                        <p>{{ config.extra.landingpage_text }}</p>
-                        <br><br><br>
-                    </div>
-                {% endif %}
-                {% if config.extra.sam_menu %}
-                    {% for link in config.extra.sam_menu %}
-                        <div class="big-link">
-                            <a href="{{ link.link }}">
-                                {{ link.text }}
-                            </a>
-                        </div>
-                    {% endfor %}
-                {% else %}
-                    {% for current in section.subsections %}
-                        {% set current = get_section(path=current) %}
-                        <div class="big-link">
-                            <a href="{{ current.permalink }}">
-                                {{ macros::title_or_last(component=current) }}
-                            </a>
-                        </div>
-                    {% endfor %}
-                {% endif %}
-            </div>
-        {% endblock body %}
-    </body>
+    {% if config.generate_feed %}
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title="Feed"
+      href="{{ get_url(path='atom.xml') }}"
+    />
+    {% endif %} {% endblock head %}
+  </head>
+  <body>
+    {% block body %}
+    <div class="section" id="splash">
+      {% if config.extra.landingpage_text %}
+      <div class="landingpage-text">
+        <p>{{ config.extra.landingpage_text }}</p>
+        <br /><br /><br />
+      </div>
+      {% endif %} {% if config.extra.sam_menu %} {% for link in
+      config.extra.sam_menu %}
+      <div class="big-link">
+        <a href="{{ link.link }}"> {{ link.text }} </a>
+      </div>
+      {% endfor %} {% else %} {% for current in section.subsections %} {% set
+      current = get_section(path=current) %}
+      <div class="big-link">
+        <a href="{{ current.permalink }}">
+          {{ macros::title_or_last(component=current) }}
+        </a>
+      </div>
+      {% endfor %} {% endif %}
+    </div>
+    {% endblock body %}
+  </body>
 </html>
